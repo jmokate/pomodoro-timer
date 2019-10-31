@@ -17,8 +17,6 @@ let min = 0;
 let sec = 5;
 let defaultNum = '0' + '0';
 
-let interval;
-
 
 let minText = document.getElementById('minutes');
 minText.innerText = min;
@@ -34,21 +32,25 @@ let intFunc;
 // startTime.addEventListener('click', function() {setTimeout(decrement, 1000)});
 // //startTime.addEventListener('click', function() {InnerText = 'stop'});
 // startTime.addEventListener('click', stopText);
-// resetTime.addEventListener('click', reset);
+//resetTime.addEventListener('click', resetCount);
+
 startTime.addEventListener('click', function(e) {
   if (id = !id) {
     resetTime.disabled = true;
     startTime.innerText = 'stop';
     intFunc = setInterval(decrement, 1000);
   } else if (id = true) {
-    stopCount();
-  } 
+    id = !id;
+    stopCount(e);
+  }
 });
+
 
 //FUNCTIONS
 
 function stopCount() {
   resetTime.disabled = false;
+  startTime.innerText = 'start';
   clearInterval(intFunc);
 }
 
@@ -58,8 +60,6 @@ function resumeCount() {
 
 //MAIN TIMER FUNCTION
 function decrement() {
-  //let id = setTimeout(decrement, 1000);
-  
 
   sec--;
   secondsText.innerText = sec;
@@ -82,11 +82,12 @@ function decrement() {
   }
 }
 
-function reset() {
-  if (sec == 0 && min == 0) {
+resetTime.addEventListener('click', function(e) {
+   min = 0;
+   sec = 5;
+   defaultNum = '0' + '0';
+});
 
-  }
-}
 
 
 
