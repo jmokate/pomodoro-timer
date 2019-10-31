@@ -28,21 +28,46 @@ secondsText.innerText = defaultNum;
 
 //let id = setInterval(decrement, 1000);
 let id;
+let intFunc;
 
-startTime.addEventListener('click', function() {setTimeout(decrement, 1000)});
+//EVENT LISTENERS
+// startTime.addEventListener('click', function() {setTimeout(decrement, 1000)});
+// //startTime.addEventListener('click', function() {InnerText = 'stop'});
+// startTime.addEventListener('click', stopText);
+// resetTime.addEventListener('click', reset);
+startTime.addEventListener('click', function(e) {
+  if (id = !id) {
+    resetTime.disabled = true;
+    startTime.innerText = 'stop';
+    intFunc = setInterval(decrement, 1000);
+  } else if (id = true) {
+    stopCount();
+  } 
+});
 
-startTime.addEventListener('click', function() {InnerText = 'stop'});
+//FUNCTIONS
 
+function stopCount() {
+  resetTime.disabled = false;
+  clearInterval(intFunc);
+}
 
+function resumeCount() {
+  setInterval(intFunc);
+}
 
+//MAIN TIMER FUNCTION
 function decrement() {
-  let id = setTimeout(decrement, 1000);
-  startTime.innerText = 'stop';
+  //let id = setTimeout(decrement, 1000);
+  
 
   sec--;
   secondsText.innerText = sec;
   if (sec < 10){
     secondsText.innerText = '0' + sec;
+  }
+  if (min < 10) {
+    minText.innerText = '0' + min;
   }
   if (sec < 0) {
     min--;
@@ -51,25 +76,22 @@ function decrement() {
     secondsText.innerText = sec;
   }
   if (sec == 0 && min == 0) {
-    clearTimeout(id);
+    clearTimeout(intFunc);
     startTime.disabled = true;
-
-  }
-   //setTimeout(decrement, 1000);
-}
-
-
-
-
-if (sec == 0 && min == 0) {
-  clearInt;
-}
-
-function clearD() {
-  if (sec === 0 && min === 0) {
-      clearInterval(decrement, 1000);
+    resetTime.disabled = false;
   }
 }
+
+function reset() {
+  if (sec == 0 && min == 0) {
+
+  }
+}
+
+
+
+
+
 
 
 
