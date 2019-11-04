@@ -3,19 +3,9 @@ const stopTime = document.getElementsByClassName('stopBtn');
 const breakTime = document.getElementsByClassName('resetBtn');
 const resetTime = document.getElementById('resetBtn');
 
-// let date = new Date();
-// date.setMinutes(25);
-// date.setSeconds(59);
-// min = date.getMinutes();
-// sec = date.getSeconds();
-
-// let sec = Math.floor((1000 * 60) % 1);
-// let timeMin = Math.floor((60000 * 25) % 1);
-// let breakMin = 5;
-
+const defaultNum = '0' + '0';
 let min = 0;
 let sec = 5;
-let defaultNum = '0' + '0';
 
 
 let minText = document.getElementById('minutes');
@@ -24,25 +14,36 @@ minText.innerText = min;
 let secondsText = document.getElementById('seconds');
 secondsText.innerText = defaultNum;
 
-//let id = setInterval(decrement, 1000);
-let id;
+
+let isActive;
 let intFunc;
+let isBreak;
 
 //EVENT LISTENERS
-// startTime.addEventListener('click', function() {setTimeout(decrement, 1000)});
-// //startTime.addEventListener('click', function() {InnerText = 'stop'});
-// startTime.addEventListener('click', stopText);
-//resetTime.addEventListener('click', resetCount);
 
-startTime.addEventListener('click', function(e) {
-  if (id = !id) {
+startTime.addEventListener('click', function() {
+  if (isActive = !isActive) {
     resetTime.disabled = true;
     startTime.innerText = 'stop';
     intFunc = setInterval(decrement, 1000);
-  } else if (id = true) {
-    id = !id;
-    stopCount(e);
+  } else if (isActive = true) {
+    isActive = !isActive;
+    stopCount();
+    breakTimer();
   }
+  console.log(isActive);
+});
+
+resetTime.addEventListener('click', function(e) {
+  min = 0;
+  sec = 5;
+  defaultNum;
+
+  let minText = document.getElementById('minutes');
+  minText.innerText = min;
+
+  let secondsText = document.getElementById('seconds');
+  secondsText.innerText = defaultNum;
 });
 
 
@@ -54,13 +55,9 @@ function stopCount() {
   clearInterval(intFunc);
 }
 
-function resumeCount() {
-  setInterval(intFunc);
-}
 
 //MAIN TIMER FUNCTION
 function decrement() {
-
   sec--;
   secondsText.innerText = sec;
   if (sec < 10){
@@ -77,34 +74,19 @@ function decrement() {
   }
   if (sec == 0 && min == 0) {
     clearTimeout(intFunc);
-    startTime.disabled = true;
-    resetTime.disabled = false;
+    //resetTime.disabled = false;
+    startTime.addEventListener('click', breakTimer());
   }
 }
 
-resetTime.addEventListener('click', function(e) {
-   min = 0;
-   sec = 5;
-   defaultNum = '0' + '0';
-});
+function breakTimer() {
+  min = 0;
+  sec = 6;
+  defaultNum;
+  if (sec == 0 && min == 0) {
+    clearInterval(intfunc);
+    
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-// startTime.addEventListener('click', startClock())
-// function startClock(){
-//   sec - 1;
-
-  
-// }
-// setInterval(startClock, 1000);
-
-
-// console.log(countDown);
+console.log(isBreak);
