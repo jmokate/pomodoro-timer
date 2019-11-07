@@ -22,16 +22,18 @@ currentSecEl.innerText = defaultNum;
 workBtn.addEventListener('click', function() {
   isBreak = false;
   workTimeDisplay();
-  displayModeText.innerText = 'Hit Start to Get Back to Work';
-  displayModeText.style.color = 'red';
+  displayModeText.innerText = 'Hit Start to Begin Work';
+  displayModeText.style.color = 'white';
   resetTime.disabled = true;
+  resetTime.style.background = 'black';
 });
 breakBtn.addEventListener('click', function(){
   isBreak = true;
   breakTimeDisplay();
   displayModeText.innerText = 'Hit Start to Take A Break';
-  displayModeText.style.color = 'green';
+  displayModeText.style.color = 'white';
   resetTime.disabled = true;
+  resetTime.style.background = 'black';
   console.log(isBreak);
 })
 
@@ -39,28 +41,19 @@ breakBtn.addEventListener('click', function(){
 startStopBtn.addEventListener('click', function() {
   if (isActive == true) {
     clearInterval(currentIntervalId);
-    workBtn.disabled = false;
-    breakBtn.disabled = false;
-    resetTime.disabled = false;
-    startStopBtn.innerText = 'start';
+    buttonsEnabledStyle();
     isActive = !isActive;
     //return; was here but greyed out below (and below code still worked)
     if (min == 0 && sec == 0) {
       if (isBreak == false) {
         displayModeText.innerText = 'Hit Start to Take A Break';
-        displayModeText.style.color = 'green';
         return;
-      } displayModeText.innerText = 'Hit Start to Get Back to Work';
-        displayModeText.style.color = 'red';
+      } displayModeText.innerText = 'Hit Start to Begin Work';       
     }
     return;
   }
     currentIntervalId = setInterval(decrement, 1000);
-    resetTime.disabled = true;
-    isActive = true;
-    startStopBtn.innerText = 'stop';
-    workBtn.disabled = true;
-    breakBtn.disabled = true;
+    buttonsDisabledStyle();
     if (min == 25) {
     min--;
     } else if (min == 5 && isBreak == true) {
@@ -127,8 +120,6 @@ function decrement() {
   if (sec == 0 && min == 0) {
     clearTimeout(currentIntervalId);    
     audioBell.play();
-    //startStopBtn.disabled = true;
-    //resetTime.disabled = false;
   }
 }
 
@@ -140,9 +131,31 @@ function workTimeDisplay() {
 }
 
 function breakTimeDisplay() {
-  currentMinEl.innerText = '0' + 5;
-  currentSecEl.innerText = defaultNum;
   min = 5;
   sec = 60;
+  currentMinEl.innerText = '0' + min;
+  currentSecEl.innerText = defaultNum;
 }
 
+function buttonsEnabledStyle() {
+  workBtn.disabled = false;
+  breakBtn.disabled = false;
+  resetTime.disabled = false;
+  startStopBtn.innerText = 'start';
+  startStopBtn.style.background = 'rgb(12, 80, 15)';
+  workBtn.style.background = 'rgb(12, 80, 15)';
+  breakBtn.style.background = 'rgb(201, 133, 44)';
+  resetTime.style.background = '#999';
+}
+
+function buttonsDisabledStyle() {
+  resetTime.disabled = true;
+  isActive = true;
+  startStopBtn.innerText = 'stop';
+  startStopBtn.style.background = 'red';
+  workBtn.disabled = true;
+  breakBtn.disabled = true;
+  workBtn.style.background = 'black';
+  breakBtn.style.background = 'black';
+  resetTime.style.background = 'black';
+}
