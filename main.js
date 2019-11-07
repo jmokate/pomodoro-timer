@@ -34,7 +34,6 @@
       clearInterval(currentIntervalId);
       buttonsEnabledStyle();
       isActive = !isActive;
-      //return; was here but greyed out below (and below code still worked)
       if (min == 0 && sec == 0) {
         if (isBreak == false) {
           displayModeText.innerText = "Hit Start to Take A Break";
